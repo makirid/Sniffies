@@ -1,19 +1,11 @@
-// A simulated nearby person shown on the Sniffies radar.
-// NOTE: This is a privacy-safe SIMULATION only — no real people are detected,
-// located, or tracked. Blips are generated and animated locally on-device.
-export type PersonStatus = 'online' | 'looking' | 'away';
-
-export interface NearbyPerson {
+// A personal saved spot the user drops on their own map.
+// These are the USER'S OWN pins, stored locally on their device — this app
+// does not read, show, or track any other person's location.
+export interface Spot {
   id: string;
-  handle: string;
-  emoji: string; // Discreet anonymous avatar
-  vibe: string; // Short one-line bio / status text
-  status: PersonStatus;
-  interests: string[]; // Tags used by the interest filter
-  distanceM: number; // Approx distance in meters (radial)
-  bearing: number; // Compass bearing 0-359 (angular position on radar)
-  speedMps: number; // Movement speed used by the animation loop
-  headingDelta: number; // Per-tick bearing drift for organic movement
-  lastSeenMs: number; // Timestamp of last "activity"
-  pinged: boolean; // Whether the user has waved/pinged them
+  label: string;
+  note?: string;
+  lat: number;
+  lng: number;
+  createdAt: number;
 }

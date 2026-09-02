@@ -1,34 +1,16 @@
-// -- Sniffies Radar (Simulated Nearby People + Person Tracking) --
-// The radar is a privacy-safe simulation. Blips are generated and animated
-// locally; nothing here detects, locates, or records real individuals.
-
 export const APP_NAME = 'Sniffies';
 
-export const RADAR_MAX_RANGE_M = 500; // Outer edge of the radar in meters
-export const RADAR_TICK_MS = 1000; // Simulation update interval
-export const RADAR_PERSON_COUNT = 9; // How many nearby people to simulate
+// Where to open the official site from the launch button / quick links.
+export const SNIFFIES_URL = 'https://sniffies.com';
 
-// Building blocks for generating anonymous, discreet profiles.
-export const SNIFFIES_HANDLES = [
-  'NightOwl', 'BlueVibes', 'RoamingSoul', 'QuietStorm', 'CityFox',
-  'VelvetHour', 'LateBloom', 'SilverLine', 'EchoWave', 'DriftKing',
-  'NeonMoth', 'HushHush', 'GoldenHour', 'RiverRun', 'AceOfCups',
-];
+// Fallback map center used when geolocation is unavailable or denied.
+// (Central London — a neutral default; the "Locate me" button recenters.)
+export const DEFAULT_CENTER: [number, number] = [51.5074, -0.1278];
+export const DEFAULT_ZOOM = 13;
 
-export const SNIFFIES_EMOJIS = ['🦊', '🐺', '🦉', '🐝', '🦋', '🌙', '⚡', '🔥', '💫', '🎭', '🍸', '🕶️'];
+// OpenStreetMap standard raster tiles.
+export const OSM_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+export const OSM_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-export const SNIFFIES_VIBES = [
-  'Out and about, say hi 👋',
-  'Just browsing the area',
-  'Discreet & down to chat',
-  'New in town tonight',
-  'Looking for good company',
-  'Passing through, low key',
-  'Coffee first, then who knows',
-  'Here for a good time',
-  'Adventurous & curious',
-];
-
-export const SNIFFIES_INTERESTS = [
-  'Casual', 'Chatty', 'Discreet', 'Nearby', 'Nightlife', 'Wellness', 'Adventurous', 'New',
-];
+export const SPOTS_STORAGE_KEY = 'sniffies.dash.spots.v1';

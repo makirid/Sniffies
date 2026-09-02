@@ -1,10 +1,11 @@
-import SniffiesRadar from './components/SniffiesRadar';
+import MapDashboard from './components/MapDashboard';
 
-// Standalone Sniffies platform: the radar is the whole app.
+// Standalone Sniffies dashboard: a personal OpenStreetMap-based map with a
+// launch button into the official site.
 function App() {
   return (
     <div className="h-full w-full bg-slate-900 text-white overflow-hidden relative font-sans">
-      <SniffiesRadar />
+      <MapDashboard />
     </div>
   );
 }

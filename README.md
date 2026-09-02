@@ -1,30 +1,29 @@
-# Sniffies
+# Sniffies Dashboard
 
-A standalone **nearby-people radar with person tracking** — built as its own
-independent app (no vending-machine / kiosk code).
+A personal, customizable **map dashboard** and launcher for
+[sniffies.com](https://sniffies.com) — built with an interactive
+**OpenStreetMap** (via Leaflet).
 
-> **Privacy note:** This is a privacy-safe, on-device **simulation**. The nearby
-> people shown on the radar are generated and animated locally in the browser.
-> **No real people are detected, located, or tracked.** The UI states this in a
-> persistent footer.
+> **Scope & privacy.** This is a *personal* tool. It launches you into the
+> **official** sniffies.com and lets you save **your own** map spots (stored
+> locally on your device). It is **not affiliated with Sniffies**, does **not**
+> connect to any Sniffies account or API, and does **not** show or track any
+> other person's location. There is no public Sniffies API, so live Sniffies
+> data cannot be displayed here.
 
 ## Features
 
-- **Radar view** — an animated radar disc with a rotating sweep line, range
-  rings, and a compass. Simulated nearby people appear as live blips positioned
-  by distance + bearing around you at the center.
-- **List view** — an alternate, distance-sorted list of nearby people with
-  status and interest tags.
-- **Person tracking** — tap any blip or list row to open a profile card, then
-  **Track** to lock on. A tracking banner shows a live distance / bearing /
-  compass / last-seen readout, and the tracked blip gets a highlighted, pinging
-  marker.
-- **Options** — status filter (online / looking / away), interest-tag filters,
-  an adjustable range slider, and a wave/ping action.
+- **Interactive OpenStreetMap** centered on your location (with your
+  permission; falls back to a default center otherwise).
+- **Save your own spots** — tap the map to drop a pin with a label and note.
+  Pins persist locally and are listed in a sidebar you can fly back to.
+- **Locate me** — recenter the map on your current position.
+- **Enter Sniffies** — one tap opens the official site in a new tab.
 
 ## Tech stack
 
 - [Vite](https://vitejs.dev/) + [React 18](https://react.dev/) + TypeScript
+- [Leaflet](https://leafletjs.com/) + [OpenStreetMap](https://www.openstreetmap.org/) tiles
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ## Getting started
@@ -36,17 +35,20 @@ npm run build    # type-check + production build
 npm run preview  # preview the production build
 ```
 
+> Geolocation and a live map require serving over `http://localhost` (dev) or
+> HTTPS (production). Map tiles are fetched from OpenStreetMap at runtime.
+
 ## Project structure
 
 ```
 index.html
 src/
   main.tsx                    # React entry point
-  App.tsx                     # Renders the radar as the whole app
+  App.tsx                     # Renders the map dashboard
   index.css                   # Tailwind + base styles
-  types.ts                    # NearbyPerson / PersonStatus
-  constants.ts                # Radar config + profile-generation pools
+  types.ts                    # Spot (a user-saved pin)
+  constants.ts                # URLs, map defaults, storage key
   components/
-    SniffiesRadar.tsx         # Radar + list views, filters, tracking, profiles
+    MapDashboard.tsx          # Leaflet map, spot saving, launcher
     SniffiesLogo.tsx          # Brand wordmark
 ```
