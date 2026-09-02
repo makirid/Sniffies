@@ -38,6 +38,31 @@ npm run preview  # preview the production build
 > Geolocation and a live map require serving over `http://localhost` (dev) or
 > HTTPS (production). Map tiles are fetched from OpenStreetMap at runtime.
 
+## Companion Android app (in-app browser)
+
+The dashboard can be wrapped as a native Android app with
+[Capacitor](https://capacitorjs.com/). In the native app, **Enter Sniffies**
+(and each spot's **Open in Sniffies**) opens the official site in an in-app
+browser (Chrome Custom Tab) so your map and the real app share one shell.
+
+```bash
+npm install
+npm run build            # produce dist/
+npm run cap:add:android  # one-time: generate the native android/ project
+npm run cap:sync         # copy the web build into the native project
+npm run cap:open:android # open in Android Studio to run / build the APK
+```
+
+The generated `android/` folder is not committed; regenerate it with
+`cap:add:android`. App identity is set in `capacitor.config.ts`.
+
+## Deep-linking into Sniffies
+
+`Open in Sniffies` hands a saved spot off to the official site. Sniffies' real
+URL scheme isn't known in this build, so it defaults to the site root. If you
+know the pattern, set `SNIFFIES_MAP_URL_TEMPLATE` in `src/constants.ts`, e.g.
+`https://sniffies.com/?lat={lat}&lng={lng}`.
+
 ## Project structure
 
 ```

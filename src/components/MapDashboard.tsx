@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Capacitor } from '@capacitor/core';
+import { Browser } from '@capacitor/browser';
 import { Spot } from '../types';
 import {
   SNIFFIES_URL,
@@ -9,6 +11,7 @@ import {
   OSM_TILE_URL,
   OSM_ATTRIBUTION,
   SPOTS_STORAGE_KEY,
+  sniffiesUrlForSpot,
 } from '../constants';
 import { SniffiesLogo } from './SniffiesLogo';
 
@@ -209,7 +212,23 @@ const MapDashboard: React.FC = () => {
     );
   };
 
-  const openSniffies = () => window.open(SNIFFIES_URL, '_blank', 'noopener,noreferrer');
+  // Open the official site. On the native (Capacitor) app this uses the
+  // in-app browser (Custom Tab) so it stays inside the same shell; on the web
+  // it opens a new tab.
+  const openUrl = async (url: string) => {
+    try {
+      if (Capacitor.isNativePlatform()) {
+        await Browser.open({ url, presentationStyle: 'fullscreen' });
+        return;
+      }
+    } catch {
+      /* fall through to web behavior */
+    }
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const openSniffies = () => openUrl(SNIFFIES_URL);
+  const openSpotInSniffies = (spot: Spot) => openUrl(sniffiesUrlForSpot(spot.lat, spot.lng));
 
   const sortedSpots = useMemo(() => [...spots].sort((a, b) => b.createdAt - a.createdAt), [spots]);
 
@@ -323,12 +342,21 @@ const MapDashboard: React.FC = () => {
                     {spot.lat.toFixed(4)}, {spot.lng.toFixed(4)}
                   </div>
                 </button>
-                <button
-                  onClick={() => removeSpot(spot.id)}
-                  className="mt-2 text-[11px] text-slate-400 hover:text-pink-400 font-semibold"
-                >
-                  Remove
-                </button>
+                <div className="mt-2 flex items-center gap-3">
+                  <button
+                    onClick={() => openSpotInSniffies(spot)}
+                    className="text-[11px] text-pink-400 hover:text-pink-300 font-bold"
+                  >
+                    Open in Sniffies ↗
+                  </button>
+                  <span className="text-slate-700">·</span>
+                  <button
+                    onClick={() => removeSpot(spot.id)}
+                    className="text-[11px] text-slate-400 hover:text-pink-400 font-semibold"
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             ))}
           </div>
