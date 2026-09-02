@@ -34,14 +34,14 @@ function saveSpots(spots: Spot[]) {
   }
 }
 
-// A pink teardrop pin for saved spots (divIcon avoids Leaflet's broken
+// A green teardrop pin for saved spots (divIcon avoids Leaflet's broken
 // default-image problem under bundlers entirely).
 const spotIcon = L.divIcon({
   className: '',
   html:
     '<div style="width:26px;height:26px;transform:translate(-13px,-26px);">' +
     '<svg viewBox="0 0 26 34" width="26" height="34" xmlns="http://www.w3.org/2000/svg">' +
-    '<path d="M13 0C6 0 0 5.6 0 12.6 0 22 13 34 13 34s13-12 13-21.4C26 5.6 20 0 13 0z" fill="#ec4899" stroke="#fff" stroke-width="2"/>' +
+    '<path d="M13 0C6 0 0 5.6 0 12.6 0 22 13 34 13 34s13-12 13-21.4C26 5.6 20 0 13 0z" fill="#22c55e" stroke="#fff" stroke-width="2"/>' +
     '<circle cx="13" cy="12.5" r="4.5" fill="#fff"/></svg></div>',
   iconSize: [26, 34],
   iconAnchor: [13, 34],
@@ -144,7 +144,7 @@ const MapDashboard: React.FC = () => {
         escapeHtml(spot.label) +
         '</div>' +
         (spot.note ? '<div style="color:#475569;font-size:12.5px;margin-bottom:8px;">' + escapeHtml(spot.note) + '</div>' : '') +
-        '<button type="button" style="border:0;background:#ec4899;color:#fff;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer;">Remove</button>';
+        '<button type="button" style="border:0;background:#22c55e;color:#fff;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer;">Remove</button>';
       const btn = el.querySelector('button');
       if (btn) btn.addEventListener('click', () => removeSpot(spot.id));
       marker.bindPopup(el);
@@ -239,7 +239,7 @@ const MapDashboard: React.FC = () => {
         <div className="flex items-center gap-4 h-full">
           <SniffiesLogo className="h-10 w-auto" />
           <div className="hidden sm:block">
-            <p className="text-xs text-pink-400/80 tracking-[0.2em] uppercase font-semibold">My Map</p>
+            <p className="text-xs text-green-400/80 tracking-[0.2em] uppercase font-semibold">My Map</p>
           </div>
         </div>
         <div className="flex items-center gap-2.5">
@@ -254,7 +254,7 @@ const MapDashboard: React.FC = () => {
           </button>
           <button
             onClick={openSniffies}
-            className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(236,72,153,0.4)]"
+            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(34,197,94,0.4)]"
           >
             Enter Sniffies
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24">
@@ -279,7 +279,7 @@ const MapDashboard: React.FC = () => {
           {pending && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[600] w-[min(92%,380px)] bg-slate-800 border border-slate-600 rounded-2xl shadow-2xl p-4 animate-fade-in-up">
               <div className="text-sm font-bold mb-2 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-pink-500" /> New spot
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500" /> New spot
                 <span className="ml-auto text-[11px] font-mono text-slate-400">
                   {pending.lat.toFixed(4)}, {pending.lng.toFixed(4)}
                 </span>
@@ -290,14 +290,14 @@ const MapDashboard: React.FC = () => {
                 onChange={e => setLabel(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && confirmAdd()}
                 placeholder="Label (e.g. Riverside park)"
-                className="w-full bg-slate-900 border border-slate-700 focus:border-pink-500 outline-none rounded-lg px-3 py-2.5 text-sm mb-2"
+                className="w-full bg-slate-900 border border-slate-700 focus:border-green-500 outline-none rounded-lg px-3 py-2.5 text-sm mb-2"
               />
               <input
                 value={note}
                 onChange={e => setNote(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && confirmAdd()}
                 placeholder="Note (optional)"
-                className="w-full bg-slate-900 border border-slate-700 focus:border-pink-500 outline-none rounded-lg px-3 py-2.5 text-sm mb-3"
+                className="w-full bg-slate-900 border border-slate-700 focus:border-green-500 outline-none rounded-lg px-3 py-2.5 text-sm mb-3"
               />
               <div className="flex gap-2">
                 <button
@@ -308,7 +308,7 @@ const MapDashboard: React.FC = () => {
                 </button>
                 <button
                   onClick={confirmAdd}
-                  className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 rounded-lg py-2.5 font-bold text-sm transition-all"
+                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 rounded-lg py-2.5 font-bold text-sm transition-all"
                 >
                   Save spot
                 </button>
@@ -333,7 +333,7 @@ const MapDashboard: React.FC = () => {
             {sortedSpots.map(spot => (
               <div
                 key={spot.id}
-                className="bg-slate-900 border border-slate-700 hover:border-pink-500/60 rounded-xl p-3 transition-colors"
+                className="bg-slate-900 border border-slate-700 hover:border-green-500/60 rounded-xl p-3 transition-colors"
               >
                 <button onClick={() => flyToSpot(spot)} className="text-left w-full">
                   <div className="font-bold text-sm truncate">{spot.label}</div>
@@ -345,14 +345,14 @@ const MapDashboard: React.FC = () => {
                 <div className="mt-2 flex items-center gap-3">
                   <button
                     onClick={() => openSpotInSniffies(spot)}
-                    className="text-[11px] text-pink-400 hover:text-pink-300 font-bold"
+                    className="text-[11px] text-green-400 hover:text-green-300 font-bold"
                   >
                     Open in Sniffies ↗
                   </button>
                   <span className="text-slate-700">·</span>
                   <button
                     onClick={() => removeSpot(spot.id)}
-                    className="text-[11px] text-slate-400 hover:text-pink-400 font-semibold"
+                    className="text-[11px] text-slate-400 hover:text-green-400 font-semibold"
                   >
                     Remove
                   </button>
@@ -371,7 +371,7 @@ const MapDashboard: React.FC = () => {
 
       {/* Toast */}
       {toast && (
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-slate-950 border border-pink-600/50 text-white px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.4)] z-[700] font-bold text-sm animate-fade-in-up">
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-slate-950 border border-green-600/50 text-white px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] z-[700] font-bold text-sm animate-fade-in-up">
           {toast}
         </div>
       )}

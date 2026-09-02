@@ -9,9 +9,9 @@ export const SniffiesLogo: React.FC<SniffiesLogoProps> = ({ className }) => (
   <svg className={className} viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="sniffiesGradient" x1="0" y1="0" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f9a8d4" />
-        <stop offset="50%" stopColor="#ec4899" />
-        <stop offset="100%" stopColor="#a855f7" />
+        <stop offset="0%" stopColor="#bef264" />
+        <stop offset="50%" stopColor="#65d63f" />
+        <stop offset="100%" stopColor="#15803d" />
       </linearGradient>
     </defs>
 
